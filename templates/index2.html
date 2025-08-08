@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ welcome }}</h1>
+    <div class="content">
+        <p>Это главная страница нашего сайта, созданного на Flask.</p>
+        <p>Здесь вы можете найти полезную информацию и ссылки на другие страницы.</p>
+        <img src="{{ url_for('static', filename='images/flask-logo.png') }}" alt="Flask Logo">
+    </div>
+{% endblock %}

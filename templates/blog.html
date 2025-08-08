@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Наш блог</h1>
+    <div class="posts">
+        {% for post in posts %}
+            <article class="post">
+                <h2>{{ post.title }}</h2>
+                <p class="date">{{ post.date }}</p>
+                <p>{{ post.content }}</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Текущее время</title>
+     <link rel="icon" href="{{ url_for('static', filename='image/icons_favicon.png') }}" type="image/png">
+</head>
+<body>
+    <div class="time-container">
+        <h1>Текущие дата и время</h1>
+        <div class="time-display">{{ current_time }}</div>
+        <div class="weekday">{{ weekday }}</div>
+        <div class="last-updated">Обновляется автоматически</div>
+    </div>
+</body>
+</html>
