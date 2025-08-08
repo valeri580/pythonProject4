@@ -11,23 +11,21 @@ def index():
 @app.route('/blog')
 def blog():
     posts = [
-        {"title": "Мой первый пост", "date": "08.08.2025", "content": "Сегодня я изучаю Flask!"},
-        {"title": "Второй пост", "date": "08.08.2025", "content": "Продолжаю изучение веб-разработки."}
+        {"title": "Мой пост", "date": "12.08.2025", "content": "Сегодня я изучаю Flask и Jinja!"},
+        {"title": "Второй пост", "date": "12.08.2025", "content": "Продолжаю изучение веб-разработки."}
     ]
-    return render_template('blog.html',
+    return render_template('home.html',
                          title="Блог",
                          posts=posts)
 
-@app.route('/contacts')
-def contacts():
-    contacts_info = {
+@app.route('/about')  # Маршрут /about
+def about():
+    about_info = {
         "email": "info@example.com",
         "phone": "+7 (123) 456-78-90",
         "address": "г. Москва, ул. Примерная, д. 1"
     }
-    return render_template('contacts.html',
-                         title="Контакты",
-                         contacts=contacts_info)
+    return render_template('about.html', title="Контакты", contacts=about_info)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
-    padding: 0;
+    padding: 0 0 60px; /* Добавлен отступ для фиксированного футера */
     color: #333;
     background-color: #f4f4f4;
 }
@@ -47,21 +47,46 @@ footer {
     width: 100%;
 }
 
-/* Стили для главной страницы */
+/* Стили для контентных блоков */
 .content {
     background: #ffffff;
     padding: 2rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden; /* Для обтекания floated элементов */
+}
+
+/* Стили для изображений */
+.page-logo,
+.blog-image,
+.limited-image {
+    max-width: 50%;
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Специфичные стили для разных случаев */
+.page-logo {
+    margin: 20px auto; /* Центрирование на главной */
+}
+
+.blog-image {
+    float: left; /* Обтекание текстом в блоге */
+    margin: 0 20px 20px 0;
 }
 
 /* Стили для блога */
 .post {
     background: #ffffff;
     padding: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Для обтекания floated элементов */
 }
 
 .post .date {
@@ -80,4 +105,24 @@ footer {
 
 .contacts li {
     margin-bottom: 0.5rem;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .page-logo,
+    .blog-image,
+    .limited-image {
+        max-width: 80%;
+        float: none;
+        margin: 20px auto;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+    }
 }
