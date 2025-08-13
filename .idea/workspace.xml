@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc8fdaf-f0e2-4eee-ace5-0bc02fd8e382" name="Changes" comment="flask">
-      <change afterPath="$PROJECT_DIR$/static/image/icon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/image/logo.jpg" afterDir="false" />
+    <list default="true" id="ddc8fdaf-f0e2-4eee-ace5-0bc02fd8e382" name="Changes" comment="Initial project upload">
+      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/icons_favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/blog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main1.py" beforeDir="false" afterPath="$PROJECT_DIR$/main1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,14 +20,26 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "valeri580"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/valeri580/pythonProject4.git",
+    "accountId": "2fc69dcc-5c53-4dc0-b928-a9ec4efed0a4"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -45,9 +54,10 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Python.main.executor": "Run",
     "Python.main1.executor": "Run",
+    "Python.main2.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/valeri"
+    "last_opened_file_path": "C:/Users/valeri/PycharmProjects/pythonProject4/app/static/image"
   },
   "keyToStringList": {
     "ChangesTree.GroupingKeys": []
@@ -91,11 +101,20 @@
       <option name="project" value="LOCAL" />
       <updated>1754655504774</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial project upload">
+      <option name="closed" value="true" />
+      <created>1754998736664</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1754998736664</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="flask" />
-    <option name="LAST_COMMIT_MESSAGE" value="flask" />
+    <MESSAGE value="Initial project upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial project upload" />
   </component>
 </project>
