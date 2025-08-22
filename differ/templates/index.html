@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Случайная цитата</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body { background: #f7f7f9; }
+      .quote-text { font-size: 1.35rem; line-height: 1.6; }
+      .fade-in { opacity: 0; transform: translateY(6px); transition: opacity .35s ease, transform .35s ease; }
+      .fade-in.show { opacity: 1; transform: translateY(0); }
+      .btn-icon { display: inline-flex; align-items: center; gap: .5rem; }
+      kbd { background:#212529; color:#fff; padding:.15rem .35rem; border-radius:.25rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h1 class="fw-semibold mb-1">Случайная цитата</h1>
+              <small class="text-secondary">Источник данных: QuoteSlate API</small>
+            </div>
+            <div class="text-end small text-secondary">
+              Горячая клавиша: <kbd>Space</kbd>
+            </div>
+          </div>
+
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <figure class="mb-0">
+                <blockquote class="blockquote mb-2">
+                  <p id="quote" class="quote-text fade-in show">“{{ q.quote }}”</p>
+                </blockquote>
+                <figcaption class="blockquote-footer mb-0">
+                  <span id="author">{{ q.author }}</span>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="card-footer d-flex justify-content-between align-items-center gap-2">
+              <div class="d-flex align-items-center gap-2">
+                <div class="spinner-border spinner-border-sm d-none" role="status" id="loader" aria-hidden="true"></div>
+                <small id="status" class="text-muted">
+                  {% if q.source == 'api' %}Источник: API{% elif q.source == 'cache' %}Источник: кэш{% elif q.source == 'local' %}Источник: локально{% endif %}
+                </small>
+              </div>
+              <div class="d-flex gap-2">
+                <button id="btn-copy" class="btn btn-outline-secondary btn-sm btn-icon" title="Скопировать">
+                  <span class="bi">📋</span><span class="d-none d-sm-inline">Скопировать</span>
+                </button>
+                <button id="btn-share" class="btn btn-outline-secondary btn-sm btn-icon" title="Поделиться">
+                  <span class="bi">🔗</span><span class="d-none d-sm-inline">Поделиться</span>
+                </button>
+                <button id="btn-new" class="btn btn-primary btn-icon">
+                  <span class="bi">✨</span> Новая цитата
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-3">
+            <small class="text-muted">
+              Нажимайте «Новая цитата» или клавишу <kbd>Space</kbd>.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast для ошибок -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+      <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="toastMsg">Ошибка</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const btnNew = document.getElementById('btn-new');
+      const btnCopy = document.getElementById('btn-copy');
+      const btnShare = document.getElementById('btn-share');
+      const quoteEl = document.getElementById('quote');
+      const authorEl = document.getElementById('author');
+      const loader = document.getElementById('loader');
+      const statusEl = document.getElementById('status');
+      const toastEl = document.getElementById('errorToast');
+      const toastBody = document.getElementById('toastMsg');
+      const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+
+      const shareSupported = !!navigator.share;
+      if (!shareSupported) btnShare.setAttribute('disabled', 'disabled');
+
+      function setLoading(isLoading, msg = '') {
+        loader.classList.toggle('d-none', !isLoading);
+        btnNew.disabled = isLoading;
+        btnCopy.disabled = isLoading;
+        if (shareSupported) btnShare.disabled = isLoading;
+        statusEl.textContent = msg || statusEl.textContent;
+      }
+
+      function fadeSwap(text, target) {
+        target.classList.remove('show');
+        setTimeout(() => {
+          target.textContent = text;
+          requestAnimationFrame(() => target.classList.add('show'));
+        }, 180);
+      }
+
+      async function loadQuote() {
+        setLoading(true, 'Загружаю…');
+        try {
+          const resp = await fetch('/api/quote', { cache: 'no-store' });
+          const json = await resp.json();
+          if (!json.ok) throw new Error(json.error || 'Неизвестная ошибка');
+
+          const { quote, author, source } = json.data;
+
+          fadeSwap('“' + (quote || '') + '”', quoteEl);
+          fadeSwap(author || 'Unknown', authorEl);
+
+          statusEl.textContent =
+            source === 'api' ? 'Источник: API' :
+            source === 'cache' ? 'Источник: кэш' :
+            source === 'local' ? 'Источник: локально' : '';
+        } catch (err) {
+          toastBody.textContent = 'Не удалось получить цитату: ' + err.message;
+          toast.show();
+          statusEl.textContent = 'Ошибка';
+        } finally {
+          setTimeout(() => (statusEl.textContent = ''), 1500);
+          setLoading(false);
+        }
+      }
+
+      btnCopy.addEventListener('click', async () => {
+        const text = `${quoteEl.textContent}\n— ${authorEl.textContent}`;
+        try {
+          await navigator.clipboard.writeText(text.trim());
+          statusEl.textContent = 'Скопировано';
+          setTimeout(() => (statusEl.textContent = ''), 1000);
+        } catch {
+          const t = new bootstrap.Toast(toastEl, { delay: 3000 });
+          toastBody.textContent = 'Не получилось скопировать';
+          t.show();
+        }
+      });
+
+      btnShare.addEventListener('click', async () => {
+        const text = `${quoteEl.textContent}\n— ${authorEl.textContent}`;
+        if (navigator.share) {
+          try { await navigator.share({ text: text.trim() }); } catch {}
+        } else {
+          try {
+            await navigator.clipboard.writeText(text.trim());
+            statusEl.textContent = 'Текст в буфере';
+            setTimeout(() => (statusEl.textContent = ''), 1200);
+          } catch {
+            const t = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toastBody.textContent = 'Поделиться не удалось';
+            t.show();
+          }
+        }
+      });
+
+      btnNew.addEventListener('click', loadQuote);
+
+      document.addEventListener('keydown', (e) => {
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea') return;
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (!btnNew.disabled) loadQuote();
+        }
+      });
+    </script>
+  </body>
+</html>
+

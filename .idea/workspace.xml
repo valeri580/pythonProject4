@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddc8fdaf-f0e2-4eee-ace5-0bc02fd8e382" name="Changes" comment="Initial project upload">
-      <change afterPath="$PROJECT_DIR$/authWebPy/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/templates/edit_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/templates/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authWebPy/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/differ/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -129,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755117585543</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Initial project upload">
+      <option name="closed" value="true" />
+      <created>1755548221744</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1755548221744</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
