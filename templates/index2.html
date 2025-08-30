@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ welcome }}</h1>
+    <div class="content">
+        <p>Это главная страница нашего сайта, созданного на Flask с использованием Jinja.</p>
+        <p>ЗАДАНИЕ:</p>
+        <p>Создайте свой HTML-шаблон (файл base.html).<br>
+            Создайте страницы home.html и about.html,<br>
+            которые будут расширять шаблон и заполнять его контентом.</p>
+        <img src="{{ url_for('static', filename='image/logo.jpg') }}" alt="Логотип" class="page-logo">
+    </div>
+{% endblock %}
+
+
+
+
+

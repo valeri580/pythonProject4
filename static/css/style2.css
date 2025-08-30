@@ -1,0 +1,128 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 0 60px; /* Добавлен отступ для фиксированного футера */
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 1rem 0;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #35424a;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Стили для контентных блоков */
+.content {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden; /* Для обтекания floated элементов */
+}
+
+/* Стили для изображений */
+.page-logo,
+.blog-image,
+.limited-image {
+    max-width: 50%;
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Специфичные стили для разных случаев */
+.page-logo {
+    margin: 20px auto; /* Центрирование на главной */
+}
+
+.blog-image {
+    float: left; /* Обтекание текстом в блоге */
+    margin: 0 20px 20px 0;
+}
+
+/* Стили для блога */
+.post {
+    background: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Для обтекания floated элементов */
+}
+
+.post .date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Стили для контактов */
+.contacts ul {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    list-style: none;
+}
+
+.contacts li {
+    margin-bottom: 0.5rem;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .page-logo,
+    .blog-image,
+    .limited-image {
+        max-width: 80%;
+        float: none;
+        margin: 20px auto;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+}

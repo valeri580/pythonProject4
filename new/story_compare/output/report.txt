@@ -1,0 +1,4 @@
+openai: FAIL
+yandex: OK
+gigachat: OK
+Лучший по длине ответа: yandex

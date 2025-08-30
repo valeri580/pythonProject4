@@ -1,0 +1,1 @@
+401 Client Error: Unauthorized for url: https://gigachat.devices.sberbank.ru/api/v1/chat/completions

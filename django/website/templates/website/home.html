@@ -1,0 +1,96 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Главная - Мой сайт{% endblock %}
+
+{% block content %}
+<!-- Hero секция -->
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-rocket me-3"></i>
+                    Добро пожаловать на наш сайт!
+                </h1>
+                <p class="lead mb-4">
+                    Мы предлагаем инновационные решения и качественные услуги 
+                    для развития вашего бизнеса. Присоединяйтесь к нам!
+                </p>
+                <a href="{% url 'services' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-arrow-right me-2"></i>Узнать больше
+                </a>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-laptop-code display-1 opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="fw-bold mb-3">Почему выбирают нас?</h2>
+                <p class="text-muted">Мы предлагаем лучшие решения для ваших задач</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="text-primary mb-3">
+                            <i class="fas fa-shield-alt fa-3x"></i>
+                        </div>
+                        <h5 class="card-title">Надежность</h5>
+                        <p class="card-text text-muted">
+                            Гарантируем высокое качество и надежность всех наших услуг
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="text-primary mb-3">
+                            <i class="fas fa-clock fa-3x"></i>
+                        </div>
+                        <h5 class="card-title">Скорость</h5>
+                        <p class="card-text text-muted">
+                            Быстрое выполнение проектов без потери качества
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="text-primary mb-3">
+                            <i class="fas fa-users fa-3x"></i>
+                        </div>
+                        <h5 class="card-title">Поддержка</h5>
+                        <p class="card-text text-muted">
+                            Профессиональная поддержка 24/7 для всех клиентов
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Призыв к действию -->
+<section class="bg-light py-5">
+    <div class="container text-center">
+        <h3 class="fw-bold mb-3">Готовы начать работу с нами?</h3>
+        <p class="text-muted mb-4">Свяжитесь с нами прямо сейчас для получения консультации</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-phone me-2"></i>Связаться с нами
+        </a>
+    </div>
+</section>
+{% endblock %}

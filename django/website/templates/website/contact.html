@@ -1,0 +1,244 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Контакты - Мой сайт{% endblock %}
+
+{% block content %}
+<!-- Заголовок страницы -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-envelope me-3"></i>Свяжитесь с нами
+                </h1>
+                <p class="lead text-muted">Мы всегда готовы ответить на ваши вопросы</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Контактная информация и форма -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Контактная информация -->
+            <div class="col-lg-6">
+                <h3 class="fw-bold mb-4">Наши контакты</h3>
+                
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
+                         style="width: 50px; height: 50px; flex-shrink: 0;">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Адрес</h6>
+                        <p class="text-muted mb-0">
+                            г. Москва, ул. Примерная, д. 123<br>
+                            БЦ "Технопарк", офис 456
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
+                         style="width: 50px; height: 50px; flex-shrink: 0;">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Телефон</h6>
+                        <p class="text-muted mb-0">
+                            <a href="tel:+74951234567" class="text-decoration-none">+7 (495) 123-45-67</a><br>
+                            <a href="tel:+79161234567" class="text-decoration-none">+7 (916) 123-45-67</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
+                         style="width: 50px; height: 50px; flex-shrink: 0;">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Email</h6>
+                        <p class="text-muted mb-0">
+                            <a href="mailto:info@mysite.ru" class="text-decoration-none">info@mysite.ru</a><br>
+                            <a href="mailto:support@mysite.ru" class="text-decoration-none">support@mysite.ru</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
+                         style="width: 50px; height: 50px; flex-shrink: 0;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Часы работы</h6>
+                        <p class="text-muted mb-0">
+                            Пн-Пт: 9:00 - 18:00<br>
+                            Сб-Вс: выходные
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Социальные сети -->
+                <div class="mt-4">
+                    <h6 class="fw-bold mb-3">Мы в социальных сетях</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-facebook-f me-1"></i>Facebook
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-twitter me-1"></i>Twitter
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-linkedin-in me-1"></i>LinkedIn
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-telegram-plane me-1"></i>Telegram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма обратной связи -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-4">Отправить сообщение</h4>
+                        
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">Имя *</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Фамилия *</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="phone" class="form-label">Телефон</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Тема сообщения *</label>
+                                    <select class="form-select" id="subject" required>
+                                        <option value="">Выберите тему</option>
+                                        <option value="consultation">Консультация</option>
+                                        <option value="services">Услуги</option>
+                                        <option value="support">Техническая поддержка</option>
+                                        <option value="partnership">Партнерство</option>
+                                        <option value="other">Другое</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Сообщение *</label>
+                                    <textarea class="form-control" id="message" rows="5" 
+                                              placeholder="Расскажите подробнее о ваших потребностях..." required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agreement" required>
+                                        <label class="form-check-label small" for="agreement">
+                                            Я согласен(а) с <a href="#" class="text-decoration-none">политикой конфиденциальности</a> 
+                                            и обработкой персональных данных *
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>Отправить сообщение
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Карта (заглушка) -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="fw-bold mb-4">Как нас найти</h3>
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <div class="text-white text-center">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                        <h5>Интерактивная карта</h5>
+                        <p class="mb-0">Здесь будет размещена карта с нашим местоположением</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ секция -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h3 class="fw-bold">Часто задаваемые вопросы</h3>
+                <p class="text-muted">Ответы на популярные вопросы наших клиентов</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Как быстро вы отвечаете на запросы?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Мы стараемся отвечать на все запросы в течение 24 часов в рабочие дни. 
+                                Срочные вопросы обрабатываются в приоритетном порядке.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Предоставляете ли вы гарантию на свои услуги?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Да, мы предоставляем гарантию на все наши услуги. Условия гарантии 
+                                обсуждаются индивидуально для каждого проекта.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Можно ли получить бесплатную консультацию?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Конечно! Первичная консультация всегда бесплатна. Мы обсудим ваши 
+                                потребности и предложим оптимальные решения.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

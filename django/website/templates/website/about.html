@@ -1,0 +1,170 @@
+{% extends 'website/base.html' %}
+
+{% block title %}О нас - Мой сайт{% endblock %}
+
+{% block content %}
+<!-- Заголовок страницы -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-info-circle me-3"></i>О нашей компании
+                </h1>
+                <p class="lead text-muted">Узнайте больше о нашей истории, миссии и ценностях</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Основная информация -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-4">Наша история</h2>
+                <p class="text-muted mb-4">
+                    Основанная в 2020 году, наша компания быстро стала лидером в области 
+                    предоставления инновационных технологических решений. Мы начинали как 
+                    небольшая команда энтузиастов, а сегодня обслуживаем клиентов по всему миру.
+                </p>
+                <p class="text-muted">
+                    За годы работы мы накопили огромный опыт и создали множество успешных 
+                    проектов, которые помогли нашим клиентам достичь своих целей.
+                </p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-history text-primary" style="font-size: 8rem; opacity: 0.7;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Миссия и ценности -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fw-bold">Наши ценности</h2>
+                <p class="text-muted">Принципы, которыми мы руководствуемся в работе</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="fas fa-handshake fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Честность</h5>
+                    <p class="text-muted small">
+                        Мы всегда честны с нашими клиентами и партнерами
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="fas fa-lightbulb fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Инновации</h5>
+                    <p class="text-muted small">
+                        Постоянно ищем новые решения и технологии
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="fas fa-medal fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Качество</h5>
+                    <p class="text-muted small">
+                        Высокие стандарты качества во всех проектах
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="fas fa-heart fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Забота</h5>
+                    <p class="text-muted small">
+                        Заботимся о каждом клиенте и его потребностях
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Команда -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fw-bold">Наша команда</h2>
+                <p class="text-muted">Профессионалы, которые делают нашу компанию особенной</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 100px; height: 100px;">
+                            <i class="fas fa-user fa-3x"></i>
+                        </div>
+                        <h5 class="fw-bold">Алексей Иванов</h5>
+                        <p class="text-muted mb-2">Генеральный директор</p>
+                        <p class="small text-muted">
+                            15+ лет опыта в области управления и развития бизнеса
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 100px; height: 100px;">
+                            <i class="fas fa-user fa-3x"></i>
+                        </div>
+                        <h5 class="fw-bold">Мария Петрова</h5>
+                        <p class="text-muted mb-2">Технический директор</p>
+                        <p class="small text-muted">
+                            Эксперт в области разработки и внедрения IT-решений
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 100px; height: 100px;">
+                            <i class="fas fa-user fa-3x"></i>
+                        </div>
+                        <h5 class="fw-bold">Дмитрий Сидоров</h5>
+                        <p class="text-muted mb-2">Менеджер проектов</p>
+                        <p class="small text-muted">
+                            Специалист по управлению проектами и клиентскому сервису
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

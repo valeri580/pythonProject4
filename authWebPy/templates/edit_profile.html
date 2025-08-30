@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Редактирование профиля{% endblock %}
+{% block content %}
+  <h2 class="mb-3">Редактирование профиля</h2>
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Имя и почта</h5>
+          <form method="post" novalidate>
+            {{ profile_form.csrf_token }}
+            <div class="mb-3">
+              <label class="form-label">{{ profile_form.name.label }}</label>
+              {{ profile_form.name(class='form-control', placeholder='Ваше имя') }}
+              {% for e in profile_form.name.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{{ profile_form.email.label }}</label>
+              {{ profile_form.email(class='form-control', placeholder='you@example.com') }}
+              {% for e in profile_form.email.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{{ profile_form.current_password_for_info.label }}</label>
+              {{ profile_form.current_password_for_info(class='form-control') }}
+              <div class="form-text">Для изменения имени или почты подтвердите текущий пароль.</div>
+              {% for e in profile_form.current_password_for_info.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            {{ profile_form.submit_info(class='btn btn-primary') }}
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Смена пароля</h5>
+          <form method="post" novalidate>
+            {{ pass_form.csrf_token }}
+            <div class="mb-3">
+              <label class="form-label">{{ pass_form.current_password.label }}</label>
+              {{ pass_form.current_password(class='form-control') }}
+              {% for e in pass_form.current_password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{{ pass_form.new_password.label }}</label>
+              {{ pass_form.new_password(class='form-control', placeholder='Минимум 6 символов') }}
+              {% for e in pass_form.new_password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{{ pass_form.new_password2.label }}</label>
+              {{ pass_form.new_password2(class='form-control', placeholder='Повторите новый пароль') }}
+              {% for e in pass_form.new_password2.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            {{ pass_form.submit_pass(class='btn btn-warning') }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

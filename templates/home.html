@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Наш блог</h1>
+    <div class="posts">
+        {% for post in posts %}
+            <article class="post">
+                <div class="post-header">
+                    <h2>{{ post.title }}</h2>
+                    <p class="date">{{ post.date }}</p>
+                </div>
+                <div class="post-content">
+                    <img src="{{ url_for('static', filename='image/logo.jpg') }}"
+                         alt="Логотип"
+                         class="blog-image">
+                    <p>{{ post.content }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}
