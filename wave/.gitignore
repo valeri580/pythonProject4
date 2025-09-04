@@ -1,0 +1,70 @@
+# Файлы с секретными данными
+.env
+*.env
+env_*.txt
+
+# API ключи и конфиденциальные данные
+*_key*
+*_token*
+*_secret*
+
+# Виртуальные окружения
+venv/
+.venv/
+env/
+ENV/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Данные и результаты работы
+data/
+out/
+reports/
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.ogg
+*.docx
+*.txt
+transcript_*
+*_transcript*
+
+# Временные файлы
+*_parts/
+*_temp*
+temp_*
+*.tmp
+
+# Логи
+*.log
+logs/
+
+# IDE файлы
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# FFmpeg портативная версия
+ffmpeg_portable/
+
+# Тестовые файлы
+test_*
+*_test*
+final_test.*
+venv_test.*
+
+# Большие файлы (GitHub лимит 100MB)
+*.zip
+*.tar.gz
+*.rar
