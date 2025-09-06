@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Загрузка новостей - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-download me-2"></i>
+                        Загрузка новостей из интернета
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info">
+                        <h5><i class="bi bi-info-circle me-2"></i>Информация</h5>
+                        <p class="mb-0">
+                            Эта функция загружает новости по теме <strong>"Нейронные сети"</strong> из интернета.
+                            Все загруженные новости попадают на модерацию и требуют одобрения перед публикацией.
+                        </p>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="{{ form.count.id_for_label }}" class="form-label">
+                                <i class="bi bi-hash me-2"></i>{{ form.count.label }}
+                            </label>
+                            {{ form.count }}
+                            {% if form.count.help_text %}
+                                <div class="form-text">{{ form.count.help_text }}</div>
+                            {% endif %}
+                            {% if form.count.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.count.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-download me-2"></i>
+                                Загрузить новости
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="/admin/" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Вернуться в админку
+                            </a>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <a href="{% url 'admin_pending_news' %}" class="btn btn-outline-info">
+                                <i class="bi bi-list me-2"></i>
+                                Новости на модерации
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

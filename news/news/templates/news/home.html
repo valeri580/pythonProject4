@@ -1,0 +1,13 @@
+{% extends 'news/layout.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+	<h1 class="display-4">Добро пожаловать на новостной сайт!</h1>
+	<p class="lead">Здесь вы можете найти самые свежие новости и события.</p>
+	<hr class="my-4">
+	<p>Перейдите на новостную страницу, чтобы увидеть все новости.</p>
+	<a class="btn btn-primary btn-lg" href="{% url 'news_home' %}" role="button">Перейти к новостям</a>
+</div>
+{% endblock %}

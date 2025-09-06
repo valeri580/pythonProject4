@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}О сайте - Новостной сайт{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-title">
+                <i class="bi bi-info-circle me-3"></i>
+                О нашем сайте
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-newspaper text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <h3 class="text-center mb-4">Добро пожаловать на наш новостной портал!</h3>
+                    
+                    <p class="lead text-center mb-4">
+                        Мы создали этот сайт, чтобы держать вас в курсе самых важных и интересных событий.
+                    </p>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="bi bi-bullseye text-primary me-2"></i>Наша миссия</h5>
+                            <p>Предоставлять актуальную, достоверную и интересную информацию нашим читателям.</p>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="bi bi-eye text-success me-2"></i>Наше видение</h5>
+                            <p>Стать ведущим источником новостей и создать активное сообщество читателей.</p>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="bi bi-star text-warning me-2"></i>Качество</h5>
+                            <p>Мы тщательно проверяем все публикуемые материалы и следим за их актуальностью.</p>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="bi bi-people text-info me-2"></i>Сообщество</h5>
+                            <p>Мы ценим каждого читателя и стремимся создать дружелюбную атмосферу.</p>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="text-center">
+                        <h5 class="mb-3">Технологии, которые мы используем:</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="p-3 border rounded">
+                                    <i class="bi bi-code-slash text-success" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">Django</h6>
+                                    <small class="text-muted">Python веб-фреймворк</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="p-3 border rounded">
+                                    <i class="bi bi-palette text-primary" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">Bootstrap</h6>
+                                    <small class="text-muted">CSS фреймворк</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="p-3 border rounded">
+                                    <i class="bi bi-file-code text-warning" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">Jinja2</h6>
+                                    <small class="text-muted">Шаблонизатор</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{% url 'news_home' %}" class="btn btn-primary btn-lg">
+                            <i class="bi bi-newspaper me-2"></i>
+                            Читать новости
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

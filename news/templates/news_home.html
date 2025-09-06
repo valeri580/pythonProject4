@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+{% load news_extras %}
+
+{% block title %}Новости - Новостной сайт{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Скрытый CSRF-токен для AJAX запросов -->
+    <form style="display:none;">
+        {% csrf_token %}
+    </form>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-title">
+                <i class="bi bi-newspaper me-3"></i>
+                Последние новости
+            </h1>
+        </div>
+    </div>
+
+    {% if news %}
+        <div class="row">
+            {% for new in news %}
+                <div class="col-12 mb-4">
+                    <article class="card news-card">
+                        <div class="news-header card-header">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h2 class="news-title mb-2">{{ new.title }}</h2>
+                                    <div class="news-meta">
+                                        <i class="bi bi-person-circle me-2"></i>
+                                        <strong>{{ new.author.username }}</strong>
+                                        <span class="mx-2">|</span>
+                                        <i class="bi bi-calendar-event me-2"></i>
+                                        {{ new.pub_date|date:"d.m.Y в H:i" }}
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    {% if user.is_authenticated %}
+                                        <button type="button" class="btn btn-sm btn-light border favorite-btn" data-news-id="{{ new.id }}" aria-label="В избранное">
+                                            <i class="bi {% if new|is_favorited_by:user %}bi-bookmark-fill text-warning{% else %}bi-bookmark{% endif %}"></i>
+                                        </button>
+                                    {% else %}
+                                        <a href="{% url 'login' %}" class="btn btn-sm btn-light border" title="Войти, чтобы добавить в избранное">
+                                            <i class="bi bi-bookmark"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if new.images.all %}
+                            <div id="carousel-{{ new.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for img in new.images.all|slice:":10" %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <img src="{{ img.image_url }}" class="d-block w-100" alt="{{ new.title }}"
+                                                 style="height: 250px; object-fit: cover;">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ new.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ new.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        {% elif new.image %}
+                            <img src="{{ new.image }}" class="card-img-top" alt="{{ new.title }}" style="height: 250px; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/600x300?text=No+Image';">
+                        {% endif %}
+                        
+                        <div class="card-body">
+                            <p class="news-description">
+                                <i class="bi bi-quote me-2"></i>
+                                {{ new.short_description }}
+                            </p>
+                            
+                            <hr class="my-3">
+                            
+                            <div class="text-end">
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'news_detail' new.id %}">
+                                    <i class="bi bi-arrows-fullscreen"></i> Подробнее
+                                </a>
+                            </div>
+                            
+                            {% if new.source_url %}
+                                <hr class="my-3">
+                                <div class="text-muted small">
+                                    <i class="bi bi-link-45deg me-2"></i>
+                                    <strong>Источник:</strong>
+                                    <a href="{{ new.source_url }}" target="_blank" class="text-decoration-none">
+                                        {{ new.source_url|truncatechars:50 }}
+                                    </a>
+                                    {% if new.is_from_internet %}
+                                        <span class="badge bg-info ms-2">Из интернета</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="card-footer bg-light">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <small class="text-muted">
+                                        <i class="bi bi-eye me-1"></i>
+                                        Опубликовано {{ new.pub_date|date:"d E Y" }}
+                                    </small>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    {% if user.is_authenticated %}
+                                        <button type="button" class="btn {% if new|is_liked_by:user %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm me-2 like-btn" 
+                                                data-news-id="{{ new.id }}"
+                                                data-liked="{% if new|is_liked_by:user %}True{% else %}False{% endif %}">
+                                            <i class="bi {% if new|is_liked_by:user %}bi-heart-fill text-danger{% else %}bi-heart{% endif %}"></i> 
+                                            <span class="like-text">Нравится</span>
+                                            <span class="like-count">({{ new.total_likes }})</span>
+                                        </button>
+                                    {% else %}
+                                        <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm me-2">
+                                            <i class="bi bi-heart"></i> Нравится ({{ new.total_likes }})
+                                        </a>
+                                    {% endif %}
+                                    <button class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-share"></i> Поделиться
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="no-news-alert text-center">
+                    <i class="bi bi-exclamation-triangle" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                    <h4>Новостей пока нет</h4>
+                    <p class="mb-4">
+                        На данный момент новости отсутствуют. 
+                        Зайдите позже или обратитесь к администратору для добавления новостей.
+                    </p>
+                    <a href="{% url 'home' %}" class="btn btn-light">
+                        <i class="bi bi-house me-2"></i>
+                        Вернуться на главную
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% block scripts %}
+<script>
+// Простая анимация для карточек новостей
+document.addEventListener('DOMContentLoaded', function() {
+    const newsCards = document.querySelectorAll('.news-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    });
+    
+    newsCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+    
+    // AJAX функциональность для лайков
+    const likeButtons = document.querySelectorAll('.like-btn');
+    
+    likeButtons.forEach(button => {
+        if (button.dataset.bound === '1') return;
+        button.dataset.bound = '1';
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const newsId = this.dataset.newsId;
+            const icon = this.querySelector('i');
+            const countSpan = this.querySelector('.like-count');
+            const wasLiked = this.dataset.liked === 'True';
+            const willBeLiked = !wasLiked;
+            this.disabled = true;
+            // Оптимистичное обновление UI
+            const currentCount = parseInt(countSpan.textContent.replace(/[^0-9]/g, '')) || 0;
+            if (willBeLiked) {
+                icon.classList.remove('bi-heart');
+                icon.classList.add('bi-heart-fill', 'text-danger');
+                this.classList.remove('btn-outline-primary');
+                this.classList.add('btn-primary');
+                this.dataset.liked = 'True';
+                countSpan.textContent = `(${currentCount + 1})`;
+            } else {
+                icon.classList.remove('bi-heart-fill', 'text-danger');
+                icon.classList.add('bi-heart');
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-outline-primary');
+                this.dataset.liked = 'False';
+                countSpan.textContent = `(${Math.max(0, currentCount - 1)})`;
+            }
+            
+            // Получаем CSRF-токен (из скрытого инпута или из cookie)
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+            const csrfToken = getCookie('csrftoken') || (document.querySelector('[name=csrfmiddlewaretoken]')?.value || '');
+
+            // Отправляем AJAX запрос (форма-urlencoded, надежно для CSRF)
+            fetch(`/news/${newsId}/like/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                credentials: 'same-origin',
+                body: `csrfmiddlewaretoken=${encodeURIComponent(csrfToken)}`
+            })
+            .then(async response => {
+                if (response.redirected && response.url.includes('/login')) {
+                    window.location.href = response.url;
+                    return Promise.reject('Redirected to login');
+                }
+                try {
+                    return await response.json();
+                } catch (e) {
+                    const text = await response.text();
+                    throw new Error('Non-JSON response: ' + text.slice(0, 200));
+                }
+            })
+            .then(data => {
+                // Итоговое состояние из сервера
+                const likedNow = !!data.liked;
+                const total = typeof data.total_likes === 'number' ? data.total_likes : null;
+                if (likedNow) {
+                    icon.classList.remove('bi-heart');
+                    icon.classList.add('bi-heart-fill', 'text-danger');
+                    this.classList.remove('btn-outline-primary');
+                    this.classList.add('btn-primary');
+                    this.dataset.liked = 'True';
+                } else {
+                    icon.classList.remove('bi-heart-fill', 'text-danger');
+                    icon.classList.add('bi-heart');
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-outline-primary');
+                    this.dataset.liked = 'False';
+                }
+                if (total !== null) {
+                    countSpan.textContent = `(${total})`;
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при обработке лайка:', error);
+                // В случае ошибки откатываемся к исходному состоянию
+                const currentCount2 = parseInt(countSpan.textContent.replace(/[^0-9]/g, '')) || 0;
+                if (wasLiked) {
+                    icon.classList.remove('bi-heart');
+                    icon.classList.add('bi-heart-fill', 'text-danger');
+                    this.classList.remove('btn-outline-primary');
+                    this.classList.add('btn-primary');
+                    this.dataset.liked = 'True';
+                    if (willBeLiked) {
+                        countSpan.textContent = `(${Math.max(0, currentCount2 - 1)})`;
+                    }
+                } else {
+                    icon.classList.remove('bi-heart-fill', 'text-danger');
+                    icon.classList.add('bi-heart');
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-outline-primary');
+                    this.dataset.liked = 'False';
+                    if (!willBeLiked) {
+                        countSpan.textContent = `(${currentCount2 + 1})`;
+                    }
+                }
+            })
+            .finally(() => {
+                this.disabled = false;
+            });
+        });
+    });
+
+    // AJAX для избранного
+    const favButtons = document.querySelectorAll('.favorite-btn');
+    favButtons.forEach(btn => {
+        if (btn.dataset.bound === '1') return; btn.dataset.bound='1';
+        btn.addEventListener('click', function(e){
+            e.preventDefault(); e.stopPropagation();
+            const id = this.dataset.newsId; const icon = this.querySelector('i');
+            const liked = icon.classList.contains('bi-bookmark-fill');
+            // оптимистично
+            if (!liked) { icon.classList.remove('bi-bookmark'); icon.classList.add('bi-bookmark-fill', 'text-warning'); }
+            else { icon.classList.remove('bi-bookmark-fill','text-warning'); icon.classList.add('bi-bookmark'); }
+            fetch(`/news/${id}/favorite/`, { method:'POST', headers:{ 'X-CSRFToken': getCookie('csrftoken') || (document.querySelector('[name=csrfmiddlewaretoken]')?.value||''), 'X-Requested-With':'XMLHttpRequest', 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8' }, credentials:'same-origin', body:'toggle=1' })
+            .then(r=>r.json()).then(data=>{
+                const f = !!data.favorited;
+                if (f) { icon.classList.remove('bi-bookmark'); icon.classList.add('bi-bookmark-fill','text-warning'); }
+                else { icon.classList.remove('bi-bookmark-fill','text-warning'); icon.classList.add('bi-bookmark'); }
+            }).catch(()=>{
+                // откат
+                if (!liked) { icon.classList.remove('bi-bookmark-fill','text-warning'); icon.classList.add('bi-bookmark'); }
+                else { icon.classList.remove('bi-bookmark'); icon.classList.add('bi-bookmark-fill','text-warning'); }
+            });
+        });
+    });
+});
+
+// Добавляем CSRF токен в мета-тег
+if (!document.querySelector('meta[name="csrf-token"]')) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (csrfToken) {
+        const meta = document.createElement('meta');
+        meta.name = 'csrf-token';
+        meta.content = csrfToken.value;
+        document.head.appendChild(meta);
+    }
+}
+</script>
+{% endblock %}
+{% endblock %}

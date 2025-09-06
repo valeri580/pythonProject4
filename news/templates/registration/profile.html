@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-circle me-2"></i>
+                        Профиль пользователя
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="text-primary">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Основная информация
+                            </h5>
+                            <hr>
+                            
+                            <div class="mb-3">
+                                <strong><i class="bi bi-person me-2"></i>Имя пользователя:</strong>
+                                <span class="ms-2">{{ user.username }}</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong><i class="bi bi-person-badge me-2"></i>Полное имя:</strong>
+                                <span class="ms-2">
+                                    {% if user.first_name or user.last_name %}
+                                        {{ user.first_name }} {{ user.last_name }}
+                                    {% else %}
+                                        Не указано
+                                    {% endif %}
+                                </span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong><i class="bi bi-envelope me-2"></i>Email:</strong>
+                                <span class="ms-2">{{ user.email|default:"Не указан" }}</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong><i class="bi bi-calendar-plus me-2"></i>Дата регистрации:</strong>
+                                <span class="ms-2">{{ user.date_joined|date:"d.m.Y в H:i" }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5 class="text-success">
+                                <i class="bi bi-award me-2"></i>
+                                Статус и права
+                            </h5>
+                            <hr>
+                            
+                            <div class="mb-3">
+                                <strong><i class="bi bi-check-circle me-2"></i>Статус аккаунта:</strong>
+                                <span class="ms-2">
+                                    {% if user.is_active %}
+                                        <span class="badge bg-success">Активен</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Неактивен</span>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            
+                            {% if user.is_staff %}
+                                <div class="mb-3">
+                                    <strong><i class="bi bi-gear me-2"></i>Права администратора:</strong>
+                                    <span class="ms-2">
+                                        <span class="badge bg-primary">Есть</span>
+                                    </span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <a href="/admin/" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-gear me-2"></i>
+                                        Перейти в админку
+                                    </a>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="mb-3">
+                                <strong><i class="bi bi-clock-history me-2"></i>Последний вход:</strong>
+                                <span class="ms-2">{{ user.last_login|date:"d.m.Y в H:i"|default:"Никогда" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="text-center">
+                        <a href="{% url 'home' %}" class="btn btn-primary me-2">
+                            <i class="bi bi-house me-2"></i>
+                            На главную
+                        </a>
+                        <a href="{% url 'news_home' %}" class="btn btn-success">
+                            <i class="bi bi-newspaper me-2"></i>
+                            Читать новости
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

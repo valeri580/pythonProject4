@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Избранное - Новостной сайт{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="page-title"><i class="bi bi-bookmarks me-2"></i>Избранные новости</h1>
+    {% if news %}
+        <div class="row">
+            {% for new in news %}
+                <div class="col-12 mb-4">
+                    <article class="card news-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <strong>{{ new.title }}</strong>
+                            <a href="{% url 'news_home' %}" class="btn btn-sm btn-outline-secondary">К списку</a>
+                        </div>
+                        {% if new.images.all %}
+                            <img src="{{ new.images.first.image_url }}" class="card-img-top" alt="{{ new.title }}"
+                                 style="height: 250px; object-fit: cover;"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/600x300?text=No+Image';">
+                        {% elif new.image %}
+                            <img src="{{ new.image }}" class="card-img-top" alt="{{ new.title }}"
+                                 style="height: 250px; object-fit: cover;"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/600x300?text=No+Image';">
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="mb-0">{{ new.short_description }}</p>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">У вас пока нет избранных новостей.</div>
+    {% endif %}
+</div>
+{% endblock %}
+
+

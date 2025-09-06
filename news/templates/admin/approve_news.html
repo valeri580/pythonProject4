@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}Модерация новости - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="page-title">
+                    <i class="bi bi-check-circle me-3"></i>
+                    Модерация новости
+                </h1>
+                <a href="{% url 'admin_pending_news' %}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Назад к списку
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-pencil-square me-2"></i>
+                        Редактирование и одобрение
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.title.id_for_label }}" class="form-label">
+                                <i class="bi bi-card-heading me-2"></i>{{ form.title.label }}
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.title.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.short_description.id_for_label }}" class="form-label">
+                                <i class="bi bi-card-text me-2"></i>{{ form.short_description.label }}
+                            </label>
+                            {{ form.short_description }}
+                            {% if form.short_description.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.short_description.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.text.id_for_label }}" class="form-label">
+                                <i class="bi bi-file-text me-2"></i>{{ form.text.label }}
+                            </label>
+                            {{ form.text }}
+                            {% if form.text.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.text.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.author.id_for_label }}" class="form-label">
+                                <i class="bi bi-person me-2"></i>{{ form.author.label }}
+                            </label>
+                            {{ form.author }}
+                            {% if form.author.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.author.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                {{ form.approve }}
+                                <label class="form-check-label" for="{{ form.approve.id_for_label }}">
+                                    <i class="bi bi-check-circle me-2"></i>{{ form.approve.label }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-check-lg me-2"></i>
+                                Обработать новость
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h6 class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Информация об источнике
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if pending_news.image_url %}
+                        <div class="mb-3">
+                            <strong>Изображение:</strong>
+                            <img src="{{ pending_news.image_url }}" 
+                                 class="img-fluid rounded mt-2" 
+                                 alt="Изображение новости"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'150\'><rect fill=\'%23e9ecef\' width=\'100%25\' height=\'100%25\'/><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236c757d\' font-size=\'16\'>Нет изображения</text></svg>';">
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <strong>Источник:</strong>
+                        <br>
+                        <a href="{{ pending_news.source_url }}" target="_blank" class="text-decoration-none">
+                            <i class="bi bi-link-45deg me-1"></i>
+                            {{ pending_news.source_url|truncatechars:50 }}
+                        </a>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Загружено:</strong>
+                        <br>
+                        {{ pending_news.created_at|date:"d.m.Y в H:i" }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Пользователь:</strong>
+                        <br>
+                        {{ pending_news.created_by.username }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning mt-3">
+                <h6><i class="bi bi-exclamation-triangle me-2"></i>Внимание!</h6>
+                <p class="mb-0 small">
+                    Проверьте содержимое новости перед одобрением. 
+                    При одобрении новость будет опубликована на сайте.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

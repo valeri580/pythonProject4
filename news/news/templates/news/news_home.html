@@ -1,0 +1,33 @@
+{% extends 'news/layout.html' %}
+
+{% block title %}Новостная страница{% endblock %}
+
+{% block content %}
+<h1>Новостная страница</h1>
+
+{% if news %}
+	{% for new in news %}
+		<div class="card mb-4">
+			<div class="card-header">
+				<h3 class="card-title mb-0">{{ new.title }}</h3>
+				<small class="text-muted">
+					Автор: {{ new.author.username }} | 
+					Дата публикации: {{ new.pub_date|date:"d.m.Y H:i" }}
+				</small>
+			</div>
+			<div class="card-body">
+				<p class="card-text"><strong>{{ new.short_description }}</strong></p>
+				<div class="mt-3">
+					{{ new.text|linebreaks }}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% else %}
+	<div class="alert alert-info">
+		<h4>Новостей пока нет</h4>
+		<p>На данный момент новости отсутствуют. Зайдите позже или обратитесь к администратору для добавления новостей.</p>
+	</div>
+{% endif %}
+
+{% endblock %}
